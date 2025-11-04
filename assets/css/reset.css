@@ -1,0 +1,39 @@
+/* Arquivo: assets/css/reset.css
+  Descrição: Remove estilos padrão do navegador (Normalize/Reset básico).
+*/
+
+/* Reseta o box-sizing para um modelo mais intuitivo */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove margens e paddings padrão */
+body, h1, h2, h3, h4, h5, h6, p, ul, li, figure, figcaption, blockquote, dl, dd, fieldset, legend {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove estilos de lista padrão */
+ul {
+  list-style: none;
+}
+
+/* Garante que imagens sejam responsivas por padrão */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Remove decoração e cor de links padrão */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Torna o body 100% da altura da viewport */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
