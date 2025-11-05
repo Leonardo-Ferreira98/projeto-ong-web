@@ -233,18 +233,18 @@
       // Carrega o conteúdo baseado no hash
       switch (hash) {
         case 'inicio':
-        this.loadHTML('inicio.html', 'main > *'); // <-- CORRIGIDO
+        this.loadHTML('inicio.html', 'body > *'); // <-- CORRIGIDO
         break;
       case 'projetos':
         this.loadProjects(); 
         break;
       case 'cadastro':
-        this.loadHTML('cadastro.html', 'main > *', () => {
+        this.loadHTML('cadastro.html', 'body > *', () => {
           FormModule.init();
         });
         break;
       default:
-        this.loadHTML('inicio.html', 'main > *'); // <-- CORRIGIDO
+        this.loadHTML('inicio.html', 'body > *'); // <-- CORRIGIDO
   }
     },
     
@@ -285,7 +285,7 @@
     // Função especial para #projetos (cumpre "JS Templating")
     loadProjects: async function() {
       // 1. Carrega o "esqueleto" da página de projetos
-      await this.loadHTML('projetos.html', 'main > *');
+      await this.loadHTML('projetos.html', 'body > *');
       
       // 2. Agora, busca os dados JSON
       try {
