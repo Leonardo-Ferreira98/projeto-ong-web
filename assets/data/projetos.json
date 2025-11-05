@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "titulo": "Educação Transformadora",
+    "descricao": "Levamos reforço escolar, oficinas de leitura e cursos profissionalizantes para crianças e adolescentes.",
+    "imagem_jpg": "assets/img/educacao.jpg",
+    "imagem_webp": "assets/img/educacao.webp",
+    "alt": "Crianças sorrindo em uma sala de aula.",
+    "tags": [
+      { "label": "Educação", "classe": "badge-educacao" },
+      { "label": "Jovens", "classe": "badge-jovem" }
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Saúde Comunitária",
+    "descricao": "Realizamos mutirões de saúde com atendimento médico e odontológico gratuito, além de palestras sobre prevenção.",
+    "imagem_jpg": "assets/img/saude.jpg",
+    "imagem_webp": "assets/img/saude.webp",
+    "alt": "Voluntário dentista atendendo um paciente.",
+    "tags": [
+      { "label": "Saúde", "classe": "badge-saude" },
+      { "label": "Comunidade", "classe": "badge-comunidade" }
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Geração de Renda",
+    "descricao": "Capacitamos adultos com cursos de artesanato e empreendedorismo para fomentar a autonomia financeira.",
+    "imagem_jpg": null,
+    "imagem_webp": null,
+    "alt": null,
+    "tags": [
+      { "label": "Renda", "classe": "badge-renda" },
+      { "label": "Comunidade", "classe": "badge-comunidade" }
+    ]
+  }
+]
