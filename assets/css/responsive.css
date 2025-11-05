@@ -104,21 +104,20 @@
 @media (max-width: 768px) {
 
   /* Faz os grids de conteúdo empilharem */
-  .content-grid-2 {
-    grid-template-columns: 1fr; /* Uma coluna só */
-    gap: var(--espaco-4);
-  }
+  /* (ADICIONE ESTA NOVA REGRA NO LUGAR DAS ANTIGAS) */
 
-  /* Inverte a ordem no mobile para (Texto, Imagem) */
-  .page-section-image .content-grid-2 {
-    grid-template-rows: auto auto;
-  }
-  .page-section-image .content-grid-2 article {
-    grid-row: 1; /* Texto vem primeiro */
-  }
-  .page-section-image .content-grid-2 picture {
-    grid-row: 2; /* Imagem vem depois */
-  }
+/* Faz o grid de 12 colunas empilhar */
+.col-span-6 {
+  grid-column: span 12; /* Faz o item de 6 colunas ocupar 12 */
+}
+
+/* Reordena a imagem no mobile (texto primeiro) */
+.page-section-image article {
+  grid-row: 1;
+}
+.page-section-image picture {
+  grid-row: 2;
+}
 
   /* Muda os cards de 2 para 1 coluna */
   .card-grid {
@@ -127,6 +126,40 @@
 
   .hero-section h2 {
     font-size: var(--tamanho-xg);
+  }
+
+}
+/* --- Breakpoint 4 (Novo): Telas Largas (min-width: 1440px) --- */
+/* (Este é o nosso 4º breakpoint, para telas maiores) */
+
+@media (min-width: 1440px) {
+
+  /* Alarga o container principal em telas de desktop grandes */
+  .container {
+    max-width: 1360px;
+  }
+
+}
+
+
+/* --- Breakpoint 5 (Novo): Telas Pequenas (max-width: 480px) --- */
+/* (Este é o nosso 5º breakpoint, para celulares menores) */
+
+@media (max-width: 480px) {
+
+  /* Reduz o título principal em telas muito pequenas */
+  .hero-section h2 {
+    font-size: var(--tamanho-lg);
+  }
+
+  /* Reduz o logo para evitar quebra de linha */
+  .logo h1 {
+    font-size: var(--tamanho-md);
+  }
+
+  .main-header .container {
+    /* Garante que o logo e o hamburger fiquem alinhados */
+    flex-wrap: wrap;
   }
 
 }

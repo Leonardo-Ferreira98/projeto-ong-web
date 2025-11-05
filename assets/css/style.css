@@ -37,6 +37,20 @@ main {
 
 /* Classe de grid de 12 colunas para usar em seções */
 .container-grid-12 {
+/* --- Classes de "span" para o grid de 12 colunas --- */
+
+/* Ocupa 12 de 12 colunas (largura total) */
+.col-span-12 {
+  grid-column: span 12;
+}
+
+/* Ocupa 6 de 12 colunas (metade da largura) */
+.col-span-6 {
+  grid-column: span 6;
+}
+
+/* (Para um sistema real, teríamos .col-span-1, 2, 3, 4, 8, etc.) */
+/* (Para esta entrega, .col-span-6 é o suficiente para provar o conceito) */
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--espaco-3); /* Espaçamento entre as colunas */
