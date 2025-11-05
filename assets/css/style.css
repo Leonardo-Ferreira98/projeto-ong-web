@@ -1,0 +1,508 @@
+/* Arquivo: assets/css/style.css
+  Descrição: Estilos principais do site, leiaute (Grid/Flex) e navegação.
+*/
+
+/* --- 1. Estilos Globais e Leiaute Principal (Grid) --- */
+/* (Requisito: "Implementar leiaute principal usando CSS grid") */
+
+body {
+  /* Define a fonte, cor e fundo usando as variáveis */
+  font-family: var(--fonte-primaria);
+  color: var(--cor-neutra-escura-1);
+  background-color: var(--cor-neutra-clara-2);
+  
+  /* Cria o "Leiaute de Grid Principal" */
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Cabeçalho, Conteúdo (flexível), Rodapé */
+  min-height: 100vh; /* Garante que o corpo ocupe 100% da altura */
+}
+
+/* O <main> é o nosso conteúdo principal (linha 2 do grid) */
+main {
+  width: 100%;
+}
+
+/* --- 2. Sistema de Grid Customizado (Container) --- */
+/* (Requisito: "Desenvolver sistema de grid customizado") */
+/* Este é o container principal que centraliza o conteúdo */
+
+.container {
+  width: 90%;
+  max-width: 1200px; /* Limite máximo do site */
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: var(--espaco-3);
+  padding-bottom: var(--espaco-4);
+}
+
+/* Classe de grid de 12 colunas para usar em seções */
+.container-grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--espaco-3); /* Espaçamento entre as colunas */
+}
+
+
+/* --- 3. Cabeçalho e Navegação (Flexbox) --- */
+/* (Requisito: "Utilizar flexbox para componentes internos") */
+
+.main-header {
+  width: 100%;
+  background-color: var(--cor-neutra-clara-1);
+  border-bottom: 2px solid var(--cor-neutra-media);
+  padding: var(--espaco-2) 0; /* Espaçamento interno */
+}
+
+/* Aplica Flexbox ao container do cabeçalho */
+.main-header .container {
+  display: flex;
+  justify-content: space-between; /* Logo de um lado, nav do outro */
+  align-items: center;
+  padding-top: 0;    /* Remove padding vertical do container */
+  padding-bottom: 0;
+}
+
+.logo h1 {
+  font-size: var(--tamanho-lg);
+  font-weight: 700;
+  color: var(--cor-primaria);
+}
+
+.main-nav > ul {
+  display: flex; /* Alinha os itens do menu */
+  gap: var(--espaco-3); /* Espaçamento entre os links */
+}
+
+.main-nav a {
+  display: block;
+  padding: var(--espaco-2);
+  font-weight: 700;
+  color: var(--cor-neutra-escura-1);
+  position: relative; /* Necessário para o efeito :hover */
+  transition: color 0.3s ease;
+}
+
+/* Efeito de hover (linha sutil) */
+.main-nav a:hover,
+.main-nav a:focus {
+  color: var(--cor-primaria);
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--cor-primaria);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.main-nav a:hover::after,
+.main-nav a:focus::after {
+  width: 60%; /* Largura da linha ao passar o mouse */
+}
+
+
+/* --- 4. Submenu Dropdown (Requisito) --- */
+.dropdown {
+  position: relative; /* O pai do submenu precisa ser relativo */
+}
+
+.submenu {
+  display: none; /* Escondido por padrão */
+  position: absolute; /* Flutua sobre o conteúdo */
+  top: 100%;
+  left: 0;
+  background-color: var(--cor-neutra-clara-1);
+  border: 1px solid var(--cor-neutra-media);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  min-width: 200px; /* Largura mínima do dropdown */
+  z-index: 10;
+  flex-direction: column; /* Itens um abaixo do outro */
+  gap: 0; /* Remove o gap do flex */
+}
+
+/* Mostra o dropdown quando o mouse passa sobre o item pai */
+.dropdown:hover .submenu,
+.dropdown:focus-within .submenu {
+  display: flex;
+}
+
+.submenu a {
+  padding: var(--espaco-2);
+  color: var(--cor-neutra-escura-1);
+  font-weight: 400;
+  width: 100%;
+}
+
+.submenu a:hover {
+  background-color: var(--cor-neutra-clara-2);
+  color: var(--cor-primaria);
+}
+.submenu a::after {
+  display: none; /* Remove o efeito de linha do submenu */
+}
+
+
+/* --- 5. Botão Hamburger (Escondido no Desktop) --- */
+.nav-toggle {
+  display: none; /* Escondido por padrão no desktop */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--espaco-1);
+}
+
+.hamburger-linha {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--cor-primaria);
+  margin: 5px 0;
+  transition: transform 0.3s ease;
+}
+
+
+/* --- 6. Rodapé (Footer) --- */
+/* (O rodapé é a linha 3 do nosso grid principal) */
+footer {
+  width: 100%;
+  background-color: var(--cor-neutra-escura-2);
+  color: var(--cor-neutra-clara-2);
+  text-align: center;
+  padding: var(--espaco-4) 0;
+}
+/* --- 7. Componente: Botões (Requisito) --- */
+/* (Requisito: "botões com estados visuais") */
+
+.btn {
+  display: inline-block; /* Permite padding e margin */
+  padding: var(--espaco-2) var(--espaco-4);
+  font-family: var(--fonte-primaria);
+  font-size: var(--tamanho-sm);
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+
+  /* Remove o padding padrão do <button> */
+  margin: 0; 
+  line-height: 1.5;
+}
+
+/* Variante de botão primário (principal) */
+.btn-primary {
+  background-color: var(--cor-primaria);
+  color: var(--cor-neutra-clara-1);
+}
+
+/* Estados Visuais */
+.btn-primary:hover {
+  background-color: var(--cor-primaria-escura);
+  color: var(--cor-neutra-clara-1);
+}
+
+.btn:focus {
+  outline: 2px solid var(--cor-primaria-escura);
+  outline-offset: 2px;
+}
+
+.btn-primary:active {
+  transform: scale(0.98); /* Efeito de clique */
+}
+
+.btn:disabled {
+  background-color: var(--cor-neutra-media);
+  color: var(--cor-neutra-escura-1);
+  cursor: not-allowed;
+}
+
+
+/* --- 8. Componente: Formulários Estilizados (Requisito) --- */
+
+.main-form {
+  background-color: var(--cor-neutra-clara-1);
+  padding: var(--espaco-4);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-top: var(--espaco-3);
+}
+
+/* (Requisito: "Implementar leiaute... grid") */
+.form-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 colunas */
+  gap: var(--espaco-4);
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  font-size: var(--tamanho-lg);
+  font-weight: 700;
+  color: var(--cor-primaria);
+  margin-bottom: var(--espaco-3);
+  padding: 0;
+}
+
+.form-group {
+  margin-bottom: var(--espaco-3);
+}
+
+.form-group label {
+  display: block; /* Etiqueta acima do campo */
+  font-weight: 700;
+  margin-bottom: var(--espaco-1);
+  color: var(--cor-neutra-escura-2);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  width: 100%;
+  padding: var(--espaco-2);
+  font-size: var(--tamanho-sm);
+  font-family: var(--fonte-primaria);
+  border: 1px solid var(--cor-neutra-media);
+  border-radius: 4px;
+  background-color: var(--cor-neutra-clara-2);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 2px rgba(0, 95, 158, 0.2); /* Sombra de foco */
+}
+
+
+/* --- 9. Validação Visual (Requisito) --- */
+
+.error-message {
+  display: none; /* Escondido por padrão (JS controla) */
+  color: var(--cor-erro);
+  font-size: var(--tamanho-xs);
+  margin-top: var(--espaco-1);
+}
+
+/* Classe adicionada pelo JS */
+input.is-invalid {
+  border-color: var(--cor-erro);
+}
+input.is-invalid:focus {
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2); /* Sombra de erro */
+}
+
+/* Classe adicionada pelo JS */
+input.is-valid {
+  border-color: var(--cor-sucesso);
+}
+input.is-valid:focus {
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2); /* Sombra de sucesso */
+}
+/* --- 10. Estilos de Conteúdo Geral (index.html, projetos.html) --- */
+
+h2, h3 {
+  font-weight: 700;
+  color: var(--cor-neutra-escura-2);
+  margin-bottom: var(--espaco-2);
+}
+
+/* Títulos de seção */
+.page-title {
+  font-size: var(--tamanho-xg);
+  color: var(--cor-primaria);
+  text-align: center;
+  margin-bottom: var(--espaco-2);
+}
+.page-subtitle {
+  font-size: var(--tamanho-base);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--espaco-4);
+}
+
+/* Parágrafos */
+p {
+  font-size: var(--tamanho-base);
+  line-height: 1.6;
+  margin-bottom: var(--espaco-2);
+}
+
+.page-section {
+  padding: var(--espaco-5) 0;
+}
+
+.page-section-dark {
+  padding: var(--espaco-5) 0;
+  background-color: var(--cor-neutra-escura-2);
+  color: var(--cor-neutra-clara-2);
+}
+.page-section-dark .page-title,
+.page-section-dark h2,
+.page-section-dark h3 {
+  color: var(--cor-neutra-clara-1);
+}
+
+/* Grid de conteúdo genérico */
+.content-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaco-5);
+  align-items: center; /* Alinha verticalmente */
+}
+
+.section-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Seção Hero (index.html) */
+.hero-section {
+  padding: var(--espaco-6) 0;
+  background-color: var(--cor-primaria-escura);
+  color: var(--cor-neutra-clara-1);
+  text-align: center;
+}
+.hero-section h2 {
+  font-size: var(--tamanho-xxg);
+  color: var(--cor-neutra-clara-1);
+}
+.hero-section p {
+  font-size: var(--tamanho-md);
+  margin-bottom: var(--espaco-4);
+}
+
+/* Botão Secundário (ex: index.html) */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+}
+.btn-secondary:hover {
+  background-color: var(--cor-primaria);
+  color: var(--cor-neutra-clara-1);
+}
+
+/* Depoimentos (projetos.html) */
+blockquote {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+blockquote p {
+  font-size: var(--tamanho-lg);
+  font-weight: 700;
+  line-height: 1.4;
+}
+blockquote cite {
+  font-size: var(--tamanho-base);
+  color: var(--cor-secundaria);
+  font-weight: 700;
+}
+
+
+/* --- 11. Componente: Cards Responsivos (Requisito) --- */
+
+.card-grid {
+  display: grid;
+  /* (Requisito: "Implementar leiautes... grid") */
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+  gap: var(--espaco-4);
+}
+
+.card {
+  background-color: var(--cor-neutra-clara-1);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden; /* Garante que a imagem respeite o radius */
+  display: flex; /* Permite que o footer grude no fim */
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.card-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* Garante que a imagem preencha o espaço */
+}
+
+.card-body {
+  padding: var(--espaco-3);
+  flex-grow: 1; /* Ocupa o espaço disponível, empurrando o footer */
+}
+.card-body h3 {
+  font-size: var(--tamanho-md);
+}
+.card-body p {
+  font-size: var(--tamanho-sm);
+}
+
+.card-footer {
+  padding: var(--espaco-2) var(--espaco-3);
+  border-top: 1px solid var(--cor-neutra-clara-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-1);
+}
+
+
+/* --- 12. Componente: Badges/Tags (Requisito) --- */
+
+.badge {
+  display: inline-block;
+  padding: 4px var(--espaco-2);
+  font-size: var(--tamanho-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 4px;
+  color: var(--cor-neutra-escura-2);
+  background-color: var(--cor-neutra-media);
+}
+
+/* Variações de cor */
+.badge-educacao { background-color: #d1eaff; color: #005f9e; }
+.badge-saude { background-color: #dcfce7; color: #1a7f37; }
+.badge-renda { background-color: #fff3d4; color: #d0840e; }
+.badge-jovem { background-color: #fce8ff; color: #a13ea5; }
+.badge-comunidade { background-color: #e6e6e6; color: #454f5b; }
+
+
+/* --- 13. Componente: Alertas/Feedback (Requisito) --- */
+
+.alert {
+  padding: var(--espaco-3);
+  margin-bottom: var(--espaco-3);
+  border-radius: 8px;
+  border: 1px solid;
+}
+
+.alert-info {
+  background-color: #e0f2fe; /* Fundo azul claro */
+  border-color: #7dd3fc;
+  color: #0c598a;
+}
+
+.alert-info strong {
+  color: #0c598a;
+}

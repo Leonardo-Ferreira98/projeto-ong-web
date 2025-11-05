@@ -5,65 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Página inicial da ONG Abrace o Futuro, dedicada a projetos sociais e voluntariado.">
   <title>ONG Abrace o Futuro - Página Inicial</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-</head>
+  </head>
 <body>
 
-  <header>
-    <h1>ONG Abrace o Futuro</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="projetos.html">Projetos</a></li>
-        <li><a href="cadastro.html">Participe</a></li>
-      </ul>
-    </nav>
+  <header class="main-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <h1>ONG Abrace o Futuro</h1>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menu de navegação">
+        <span class="hamburger-linha"></span>
+        <span class="hamburger-linha"></span>
+        <span class="hamburger-linha"></span>
+      </button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li class="dropdown">
+            <a href="projetos.html">Projetos</a>
+            <ul class="submenu">
+              <li><a href="projetos.html#acoes-sociais">Ações Sociais</a></li>
+              <li><a href="projetos.html#depoimentos">Depoimentos</a></li>
+              <li><a href="projetos.html#doacao">Formas de Doação</a></li>
+            </ul>
+          </li>
+          <li><a href="cadastro.html">Participe</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="missao">
-      <h2>Nossa Missão</h2>
-      <p>Transformar vidas e comunidades através de ações sociais focadas em educação, saúde e desenvolvimento sustentável, promovendo a cidadania e a esperança.</p>
+    <section class="hero-section">
+      <div class="container">
+        <h2>Bem-vindo à Abrace o Futuro</h2>
+        <p>Juntos, podemos construir um amanhã mais justo e solidário.</p>
+        <a href="projetos.html" class="btn btn-primary">Conheça Nossos Projetos</a>
+      </div>
     </section>
 
-    <section id="visao-valores">
-      <h2>Visão e Valores</h2>
-      <p>Nossa visão é ser referência em impacto social, construindo um futuro onde todos tenham oportunidades iguais. Nossos valores são: Ética, Transparência, Empatia e Comprometimento.</p>
+    <section id="missao-visao" class="page-section container">
+      <div class="content-grid-2">
+        <article>
+          <h3>Nossa Missão</h3>
+          <p>Transformar vidas e comunidades através de ações sociais focadas em educação, saúde e desenvolvimento sustentável, promovendo a cidadania e a esperança.</p>
+        </article>
+        <article>
+          <h3>Visão e Valores</h3>
+          <p>Nossa visão é ser referência em impacto social, construindo um futuro onde todos tenham oportunidades iguais. Nossos valores são: Ética, Transparência, Empatia e Comprometimento.</p>
+        </article>
+      </div>
+    </section>
+    
+    <section id="historico" class="page-section-image">
+      <div class="container content-grid-2">
+        <article>
+          <h3>Nossa História</h3>
+          <p>Fundada em 2010, a Abrace o Futuro nasceu do sonho de um grupo de voluntários dedicados a fazer a diferença na comunidade local. Hoje, impactamos milhares de vidas.</p>
+          <a href="cadastro.html" class="btn btn-secondary">Faça Parte da História</a>
+        </article>
+        <picture>
+          <source srcset="assets/img/sede.webp" type="image/webp">
+          <source srcset="assets/img/sede.jpg" type="image/jpeg">
+          <img src="assets/img/sede.jpg" alt="Foto da sede da ONG Abrace o Futuro em um dia ensolarado." class="section-image">
+        </picture>
+      </div>
     </section>
 
-    <section id="historico">
-      <h2>Nossa História</h2>
-      <p>Fundada em 2010, a Abrace o Futuro nasceu do sonho de um grupo de voluntários dedicados a fazer a diferença na comunidade local. Hoje, impactamos milhares de vidas.</p>
-      
-      <picture>
-        <source srcset="assets/img/sede.webp" type="image/webp">
-        <source srcset="assets/img/sede.jpg" type="image/jpeg">
-        <img src="assets/img/sede.jpg" alt="Foto da sede da ONG Abrace o Futuro em um dia ensolarado.">
-      </picture>
-
-    </section>
-
-    <section id="contato">
+    <section id="contato" class="page-section container">
       <h2>Contato</h2>
       <p>Entre em contato conosco para parcerias, dúvidas ou sugestões:</p>
       <ul>
-        <li>Email: contato@abraceofuturo.org</li>
-        <li>Telefone: (11) 4004-1234</li>
-        <li>Endereço: Rua da Esperança, 123 - Centro</li>
+        <li><strong>Email:</strong> contato@abraceofuturo.org</li>
+        <li><strong>Telefone:</strong> (11) 4004-1234</li>
+        <li><strong>Endereço:</strong> Rua da Esperança, 123 - Centro</li>
       </ul>
     </section>
+    
   </main>
 
   <footer>
     <p>&copy; 2025 ONG Abrace o Futuro. Todos os direitos reservados.</p>
     </footer>
 
+  <script src="assets/js/script.js" defer></script>
 </body>
 </html>

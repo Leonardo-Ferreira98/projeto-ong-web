@@ -5,80 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Conheça os projetos sociais, ações de voluntariado e formas de doação da ONG Abrace o Futuro.">
   <title>Projetos - ONG Abrace o Futuro</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-</head>
+  </head>
 <body>
 
-  <header>
-    <h1>Projetos e Voluntariado</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="projetos.html">Projetos</a></li>
-        <li><a href="cadastro.html">Participe</a></li>
-      </ul>
-    </nav>
+  <header class="main-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <h1>ONG Abrace o Futuro</h1>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menu de navegação">
+        <span class="hamburger-linha"></span>
+        <span class="hamburger-linha"></span>
+        <span class="hamburger-linha"></span>
+      </button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li class="dropdown">
+            <a href="projetos.html">Projetos</a>
+            <ul class="submenu">
+              <li><a href="projetos.html#acoes-sociais">Ações Sociais</a></li>
+              <li><a href="projetos.html#depoimentos">Depoimentos</a></li>
+              <li><a href="projetos.html#doacao">Formas de Doação</a></li>
+            </ul>
+          </li>
+          <li><a href="cadastro.html">Participe</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="acoes-sociais">
-      <h2>Nossas Ações Sociais</h2>
+    <section id="acoes-sociais" class="page-section container">
+      <h2 class="page-title">Nossas Ações Sociais</h2>
+      <p class="page-subtitle">Conheça os pilares da nossa atuação e o impacto que geramos.</p>
       
-      <article>
-        <h3>Educação Transformadora</h3>
-        <p>Levamos reforço escolar, oficinas de leitura e cursos profissionalizantes para crianças e adolescentes em situação de vulnerabilidade.</p>
+      <div class="card-grid">
         
-        <picture>
-          <source srcset="assets/img/educacao.webp" type="image/webp">
-          <source srcset="assets/img/educacao.jpg" type="image/jpeg">
-          <img src="assets/img/educacao.jpg" alt="Crianças sorrindo em uma sala de aula do projeto Educação Transformadora.">
-        </picture>
-
-      </article>
-      
-      <article>
-        <h3>Saúde Comunitária</h3>
-        <p>Realizamos mutirões de saúde com atendimento médico e odontológico gratuito, além de palestras sobre prevenção de doenças.</p>
+        <article class="card">
+          <picture class="card-image">
+            <source srcset="assets/img/educacao.webp" type="image/webp">
+            <source srcset="assets/img/educacao.jpg" type="image/jpeg">
+            <img src="assets/img/educacao.jpg" alt="Crianças sorrindo em uma sala de aula.">
+          </picture>
+          <div class="card-body">
+            <h3>Educação Transformadora</h3>
+            <p>Levamos reforço escolar, oficinas de leitura e cursos profissionalizantes para crianças e adolescentes.</p>
+          </div>
+          <footer class="card-footer">
+            <span class="badge badge-educacao">Educação</span>
+            <span class="badge badge-jovem">Jovens</span>
+          </footer>
+        </article>
         
-        <picture>
-          <source srcset="assets/img/saude.webp" type="image/webp">
-          <source srcset="assets/img/saude.jpg" type="image/jpeg">
-          <img src="assets/img/saude.jpg" alt="Voluntário dentista atendendo um paciente no projeto Saúde Comunitária.">
-        </picture>
+        <article class="card">
+          <picture class="card-image">
+            <source srcset="assets/img/saude.webp" type="image/webp">
+            <source srcset="assets/img/saude.jpg" type="image/jpeg">
+            <img src="assets/img/saude.jpg" alt="Voluntário dentista atendendo um paciente.">
+          </picture>
+          <div class="card-body">
+            <h3>Saúde Comunitária</h3>
+            <p>Realizamos mutirões de saúde com atendimento médico e odontológico gratuito, além de palestras sobre prevenção.</p>
+          </div>
+          <footer class="card-footer">
+            <span class="badge badge-saude">Saúde</span>
+            <span class="badge badge-comunidade">Comunidade</span>
+          </footer>
+        </article>
+        
+        <article class="card">
+          <div class="card-body">
+            <h3>Geração de Renda</h3>
+            <p>Capacitamos adultos com cursos de artesanato e empreendedorismo para fomentar a autonomia financeira.</p>
+          </div>
+          <footer class="card-footer">
+            <span class="badge badge-renda">Renda</span>
+            <span class="badge badge-comunidade">Comunidade</span>
+          </footer>
+        </article>
+        
+      </div> </section>
 
-      </article>
+    <section id="depoimentos" class="page-section-dark">
+      <div class="container">
+        <h2 class="page-title">Depoimentos</h2>
+        <blockquote>
+          <p>"Participar como voluntária na Abrace o Futuro mudou minha perspectiva de vida. Ver o impacto real do nosso esforço não tem preço."</p>
+          <cite>– Maria Silva, Voluntária</cite>
+        </blockquote>
+      </div>
     </section>
 
-    <section id="depoimentos">
-      <h2>Depoimentos</h2>
-      <blockquote>
-        <p>"Participar como voluntária na Abrace o Futuro mudou minha perspectiva de vida. Ver o impacto real do nosso esforço não tem preço."</p>
-        <cite>– Maria Silva, Voluntária</cite>
-      </blockquote>
-      <blockquote>
-        <p>"Meu filho participa das oficinas de leitura e hoje ele ama livros. Sou muito grata pelo trabalho da ONG no nosso bairro."</p>
-        <cite>– João Pereira, Pai de Atendido</cite>
-      </blockquote>
-    </section>
-
-    <section id="doacao">
-      <h2>Formas de Doação</h2>
-      <p>Sua contribuição é fundamental para mantermos nossos projetos ativos. Você pode doar de forma segura através de PIX, transferência bancária ou boleto.</p>
+    <section id="doacao" class="page-section container">
+      <h2 class="page-title">Formas de Doação</h2>
+      
+      <div class="alert alert-info">
+        <strong>Sua contribuição é fundamental!</strong> Ela nos ajuda a manter nossos projetos ativos e a expandir nosso impacto.
+      </div>
+      
+      <p>Você pode doar de forma segura através de PIX, transferência bancária ou boleto. Para doações recorrentes, cadastre-se!</p>
       <p><strong>Chave PIX (CNPJ):</strong> 12.345.678/0001-99</p>
-      <a href="cadastro.html">Quero ser um doador recorrente</a>
+      <a href="cadastro.html" class="btn btn-primary">Quero ser um doador recorrente</a>
     </section>
   </main>
-
   <footer>
     <p>&copy; 2025 ONG Abrace o Futuro. Todos os direitos reservados.</p>
     </footer>
 
+  <script src="assets/js/script.js" defer></script>
 </body>
 </html>
