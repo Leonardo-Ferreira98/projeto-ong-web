@@ -202,115 +202,141 @@
      (Funcionalidade da Entrega III - "Sistema de SPA básico")
      ======================================================================== */
      
-  const SPARouter = {
-    contentArea: null,
+  /* ========================================================================
+   4. MÓDULO ROTEADOR DA SPA
+   (Funcionalidade da Entrega III - "Sistema de SPA básico")
+   [CORRIGIDO PARA LIDAR COM ÂNCORAS / SCROLL]
+   ======================================================================== */
+   
+const SPARouter = {
+  contentArea: null,
+  
+  init: function() {
+    this.contentArea = document.getElementById('main-content-area');
+    if (!this.contentArea) {
+      console.error("Erro: Área de conteúdo principal 'main-content-area' não encontrada.");
+      return;
+    }
     
-    init: function() {
-      this.contentArea = document.getElementById('main-content-area');
-      if (!this.contentArea) {
-        console.error("Erro: Área de conteúdo principal 'main-content-area' não encontrada.");
-        return;
-      }
-      
-      // Ouve mudanças na URL (ex: #inicio -> #projetos)
-      window.addEventListener('hashchange', () => this.route());
-      
-      // Carrega a rota inicial (ou a página inicial se não houver hash)
-      this.route();
-    },
+    // Ouve mudanças na URL (ex: #inicio -> #projetos)
+    window.addEventListener('hashchange', () => this.route());
     
-    route: function() {
-      let hash = window.location.hash;
-      
-      // Se não houver hash, define o padrão como #inicio
-      if (!hash) {
-        hash = '#inicio';
-      }
-      
-      // Limpa a âncora (ex: #projetos#acoes-sociais -> #projetos)
-      hash = hash.split('#')[1];
-      
-      // Carrega o conteúdo baseado no hash
-      switch (hash) {
-        case 'inicio':
-        this.loadHTML('inicio.html', 'body > *'); // <-- CORRIGIDO
+    // Carrega a rota inicial (ou a página inicial se não houver hash)
+    this.route();
+  },
+  
+  route: function() {
+    let hash = window.location.hash;
+    
+    if (!hash) {
+      hash = '#inicio';
+    }
+    
+    // [CORREÇÃO] Pega a rota principal E a âncora (ex: #projetos e #acoes-sociais)
+    const parts = hash.substring(1).split('#'); // ex: ["projetos", "acoes-sociais"]
+    const mainRoute = parts[0]; // ex: "projetos"
+    const anchor = parts[1] || null;  // ex: "acoes-sociais" ou null
+    
+    // Carrega o conteúdo baseado no hash
+    switch (mainRoute) {
+      case 'inicio':
+        this.loadHTML('inicio.html', 'body > *', null, anchor);
         break;
       case 'projetos':
-        this.loadProjects(); 
+        this.loadProjects(anchor); // Passa a âncora para a função
         break;
       case 'cadastro':
-        this.loadHTML('cadastro.html', 'body > *', () => {
-          FormModule.init();
-        });
+        // Passa a âncora e o callback
+        this.loadHTML('cadastro.html', 'body > *', () => FormModule.init(), anchor);
         break;
       default:
-        this.loadHTML('inicio.html', 'body > *'); // <-- CORRIGIDO
-  }
-    },
-    
-    // Função para buscar e injetar HTML (para #inicio e #cadastro)
-    loadHTML: async function(url, selector, callback) {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Não foi possível carregar o conteúdo.');
-        
-        const text = await response.text();
-        
-        // Usa um 'parser' para converter o texto HTML em um documento DOM
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-        
-        // Seleciona *apenas* o conteúdo de <main> do arquivo buscado
-        const content = doc.querySelector(selector);
-        
-        if (content) {
-          this.contentArea.innerHTML = ''; // Limpa a área
-          // O querySelectorAll retorna uma NodeList, precisamos iterar
-          doc.querySelectorAll(selector).forEach(node => {
-            this.contentArea.appendChild(node.cloneNode(true));
-          });
-        } else {
-          this.contentArea.innerHTML = '<p>Erro: Conteúdo não encontrado.</p>';
-        }
-        
-        // Se houver um callback (como o FormModule.init), executa-o
-        if (callback) callback();
-        
-      } catch (error) {
-        console.error('Erro ao carregar página:', error);
-        this.contentArea.innerHTML = '<p>Erro ao carregar o conteúdo. Tente novamente.</p>';
-      }
-    },
-    
-    // Função especial para #projetos (cumpre "JS Templating")
-    loadProjects: async function() {
-      // 1. Carrega o "esqueleto" da página de projetos
-      await this.loadHTML('projetos.html', 'body > *');
-      
-      // 2. Agora, busca os dados JSON
-      try {
-        const response = await fetch('assets/data/projetos.json');
-        if (!response.ok) throw new Error('Não foi possível carregar os dados dos projetos.');
-        
-        const projetos = await response.json();
-        
-        // 3. Pega o container dos cards (que foi carregado no passo 1)
-        const grid = document.getElementById('project-card-grid');
-        if (grid) {
-          grid.innerHTML = ''; // Limpa a mensagem "Carregando..."
-          
-          // 4. Usa o TemplateModule para construir e injetar cada card
-          projetos.forEach(projeto => {
-            const cardHTML = TemplateModule.buildProjectCard(projeto);
-            grid.innerHTML += cardHTML;
-          });
-        }
-      } catch (error) {
-        console.error('Erro ao carregar dados dos projetos:', error);
-        const grid = document.getElementById('project-card-grid');
-        if (grid) grid.innerHTML = '<p>Erro ao carregar os projetos.</p>';
-      }
+        this.loadHTML('inicio.html', 'body > *', null, anchor);
     }
-  };
+  },
+  
+  // [CORREÇÃO] Função de scroll para âncora
+  scrollToAnchor: function(anchorId) {
+    // Usa um setTimeout de 100ms. Isso dá ao navegador tempo
+    // para renderizar o novo conteúdo (HTML/Cards) ANTES de
+    // tentarmos rolar para um ID dentro dele.
+    setTimeout(() => {
+      const element = document.getElementById(anchorId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  },
+  
+  // [CORREÇÃO] loadHTML agora aceita a âncora
+  loadHTML: async function(url, selector, callback, anchor) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Não foi possível carregar o conteúdo.');
+      
+      const text = await response.text();
+      
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/html');
+      
+      const content = doc.querySelector(selector);
+      
+      if (content) {
+        this.contentArea.innerHTML = '';
+        doc.querySelectorAll(selector).forEach(node => {
+          this.contentArea.appendChild(node.cloneNode(true));
+        });
+      } else {
+        this.contentArea.innerHTML = '<p>Erro: Conteúdo não encontrado.</p>';
+      }
+      
+      if (callback) callback();
+      
+      // [CORREÇÃO] Tenta rolar para a âncora depois que o HTML for carregado
+      if (anchor) {
+        this.scrollToAnchor(anchor);
+      }
+      
+    } catch (error) {
+      console.error('Erro ao carregar página:', error);
+      this.contentArea.innerHTML = '<p>Erro ao carregar o conteúdo. Tente novamente.</p>';
+    }
+  },
+  
+  // [CORREÇÃO] loadProjects agora aceita a âncora
+  loadProjects: async function(anchor) {
+    // 1. Carrega o "esqueleto" da página de projetos
+    // (Não passamos a âncora aqui, pois o conteúdo final (cards)
+    // ainda não foi carregado)
+    await this.loadHTML('projetos.html', 'body > *');
+    
+    // 2. Agora, busca os dados JSON
+    try {
+      const response = await fetch('assets/data/projetos.json');
+      if (!response.ok) throw new Error('Não foi possível carregar os dados dos projetos.');
+      
+      const projetos = await response.json();
+      
+      const grid = document.getElementById('project-card-grid');
+      if (grid) {
+        grid.innerHTML = '';
+        
+        projetos.forEach(projeto => {
+          const cardHTML = TemplateModule.buildProjectCard(projeto);
+          grid.innerHTML += cardHTML;
+        });
+      }
+    } catch (error) {
+      console.error('Erro ao carregar dados dos projetos:', error);
+      const grid = document.getElementById('project-card-grid');
+      if (grid) grid.innerHTML = '<p>Erro ao carregar os projetos.</p>';
+    }
+    
+    // [CORREÇÃO] Tenta rolar para a âncora DEPOIS que os cards
+    // e o esqueleto da página foram carregados.
+    if (anchor) {
+      this.scrollToAnchor(anchor);
+    }
+  }
+};
 
 })(); // Fim da IIFE
