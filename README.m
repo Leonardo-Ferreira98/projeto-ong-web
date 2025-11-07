@@ -1,6 +1,6 @@
-# Projeto ONG Abrace o Futuro - Entrega I
+# Projeto ONG Abrace o Futuro - 
 
-Este repositório contém o projeto desenvolvido para a **Entrega I: Fundamentos e Estruturação** da disciplina de **Desenvolvimento Front-end para Web**.
+Este repositório contém o projeto desenvolvido para a **: Fundamentos e Estruturação** da disciplina de **Desenvolvimento Front-end para Web**.
 
 ## 🎯 Objetivo
 

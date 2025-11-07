@@ -1,6 +1,6 @@
 /* ========================================================================
    Arquivo: assets/js/script.js
-   Descrição: Script unificado para Entrega III.
+   Descrição: Script unificado para I.
    Organizado por funcionalidade (Módulos)
    ======================================================================== */
 
@@ -20,7 +20,7 @@
 
   /* ========================================================================
      1. MÓDULO DE NAVEGAÇÃO (Menu Hamburger)
-     (Funcionalidade da Entrega II)
+     (Funcionalidade da )
      ======================================================================== */
   
   const MenuModule = {
@@ -77,7 +77,7 @@
     },
     
     applyMasks: function() {
-      // ... (código das máscaras da Entrega I) ...
+      // ... (código das máscaras da ) ...
       const inputCpf = document.getElementById('cpf');
       const inputTelefone = document.getElementById('telefone');
       const inputCep = document.getElementById('cep');
@@ -126,7 +126,7 @@
         else if (input.validity.typeMismatch) errorMessage = 'Por favor, insira um e-mail válido.';
       }
       
-      // 3. [ENTREGA III] - Verificação de Consistência de Dados
+      // 3. [I] - Verificação de Consistência de Dados
       if (input.id === 'nascimento' && input.value) {
         const dataNascimento = new Date(input.value);
         const hoje = new Date();
@@ -157,7 +157,7 @@
 
   /* ========================================================================
      3. MÓDULO DE TEMPLATES
-     (Funcionalidade da Entrega III - "Sistema de templates JavaScript")
+     (Funcionalidade da I - "Sistema de templates JavaScript")
      ======================================================================== */
      
   const TemplateModule = {
@@ -199,12 +199,12 @@
 
   /* ========================================================================
      4. MÓDULO ROTEADOR DA SPA
-     (Funcionalidade da Entrega III - "Sistema de SPA básico")
+     (Funcionalidade da I - "Sistema de SPA básico")
      ======================================================================== */
      
   /* ========================================================================
    4. MÓDULO ROTEADOR DA SPA
-   (Funcionalidade da Entrega III - "Sistema de SPA básico")
+   (Funcionalidade da I - "Sistema de SPA básico")
    [CORRIGIDO PARA LIDAR COM ÂNCORAS / SCROLL]
    ======================================================================== */
    
