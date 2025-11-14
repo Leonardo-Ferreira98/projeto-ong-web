@@ -13,6 +13,7 @@
     // Inicia os módulos principais
     MenuModule.init();
     SPARouter.init();
+    ThemeModule.init();
     
     // O FormModule será inicializado pelo SPARouter QUANDO a página de cadastro for carregada
     
@@ -338,5 +339,40 @@ const SPARouter = {
     }
   }
 };
+/* ========================================================================
+     5. MÓDULO DE ACESSIBILIDADE (Modo Escuro)
+     ======================================================================== */
 
+  const ThemeModule = {
+    init: function() {
+      const toggle = document.getElementById('theme-toggle');
+      if (!toggle) return;
+
+      // 1. Verifica se há preferência salva no LocalStorage
+      const AbraceTheme = localStorage.getItem('AbraceTheme');
+      if (AbraceTheme === 'dark') {
+        this.enableDarkMode();
+        toggle.checked = true;
+      }
+
+      // 2. Adiciona o evento de clique
+      toggle.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          this.enableDarkMode();
+        } else {
+          this.disableDarkMode();
+        }
+      });
+    },
+
+    enableDarkMode: function() {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('AbraceTheme', 'dark'); // Salva a preferência
+    },
+
+    disableDarkMode: function() {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('AbraceTheme', 'light'); // Salva a preferência
+    }
+  };
 })(); // Fim da IIFE

@@ -8,8 +8,8 @@
 body {
   /* Define a fonte, cor e fundo usando as variáveis */
   font-family: var(--fonte-primaria);
-  color: var(--cor-neutra-escura-1);
-  background-color: var(--cor-neutra-clara-2);
+  color: var(--cor-texto-principal);
+  background-color: var(--cor-fundo-site);
   
   /* Cria o "Leiaute de Grid Principal" */
   display: grid;
@@ -62,8 +62,8 @@ main {
 
 .main-header {
   width: 100%;
-  background-color: var(--cor-neutra-clara-1);
-  border-bottom: 2px solid var(--cor-neutra-media);
+  background-color: var(--cor-fundo-componente);
+  border-bottom: 2px solid var(--cor-borda);
   padding: var(--espaco-2) 0; /* Espaçamento interno */
 }
 
@@ -91,7 +91,7 @@ main {
   display: block;
   padding: var(--espaco-2);
   font-weight: 700;
-  color: var(--cor-neutra-escura-1);
+  color: var(--cor-texto-principal);
   position: relative; /* Necessário para o efeito :hover */
   transition: color 0.3s ease;
 }
@@ -130,8 +130,8 @@ main {
   position: absolute; /* Flutua sobre o conteúdo */
   top: 100%;
   left: 0;
-  background-color: var(--cor-neutra-clara-1);
-  border: 1px solid var(--cor-neutra-media);
+  background-color: var(--cor-fundo-componente);
+  border: 1px solid var(--cor-borda);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   min-width: 200px; /* Largura mínima do dropdown */
   z-index: 10;
@@ -147,13 +147,13 @@ main {
 
 .submenu a {
   padding: var(--espaco-2);
-  color: var(--cor-neutra-escura-1);
+  color: var(--cor-texto-principal);
   font-weight: 400;
   width: 100%;
 }
 
 .submenu a:hover {
-  background-color: var(--cor-neutra-clara-2);
+  background-color: var(--cor-fundo-hover);
   color: var(--cor-primaria);
 }
 .submenu a::after {
@@ -184,8 +184,8 @@ main {
 /* (O rodapé é a linha 3 do nosso grid principal) */
 footer {
   width: 100%;
-  background-color: var(--cor-neutra-escura-2);
-  color: var(--cor-neutra-clara-2);
+  background-color: var(--cor-texto-titulo);
+  color: var(--cor-fundo-site);
   text-align: center;
   padding: var(--espaco-4) 0;
 }
@@ -213,13 +213,13 @@ footer {
 /* Variante de botão primário (principal) */
 .btn-primary {
   background-color: var(--cor-primaria);
-  color: var(--cor-neutra-clara-1);
+  color: var(--cor-fundo-componente);
 }
 
 /* Estados Visuais */
 .btn-primary:hover {
   background-color: var(--cor-primaria-escura);
-  color: var(--cor-neutra-clara-1);
+  color: var(--cor-fundo-componente);
 }
 
 .btn:focus {
@@ -232,8 +232,8 @@ footer {
 }
 
 .btn:disabled {
-  background-color: var(--cor-neutra-media);
-  color: var(--cor-neutra-escura-1);
+  background-color: var(--cor-borda);
+  color: var(--cor-texto-principal);
   cursor: not-allowed;
 }
 
@@ -241,7 +241,7 @@ footer {
 /* --- 8. Componente: Formulários Estilizados (Requisito) --- */
 
 .main-form {
-  background-color: var(--cor-neutra-clara-1);
+  background-color: var(--cor-fundo-componente);
   padding: var(--espaco-4);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -277,7 +277,7 @@ legend {
   display: block; /* Etiqueta acima do campo */
   font-weight: 700;
   margin-bottom: var(--espaco-1);
-  color: var(--cor-neutra-escura-2);
+  color: var(--cor-texto-titulo);
 }
 
 input[type="text"],
@@ -288,9 +288,9 @@ input[type="date"] {
   padding: var(--espaco-2);
   font-size: var(--tamanho-sm);
   font-family: var(--fonte-primaria);
-  border: 1px solid var(--cor-neutra-media);
+  border: 1px solid var(--cor-borda);
   border-radius: 4px;
-  background-color: var(--cor-neutra-clara-2);
+  background-color: var(--cor-fundo-site);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -300,6 +300,7 @@ input[type="tel"]:focus,
 input[type="date"]:focus {
   outline: none;
   border-color: var(--cor-primaria);
+  background-color: var(--cor-fundo-input);
   box-shadow: 0 0 0 2px rgba(0, 95, 158, 0.2); /* Sombra de foco */
 }
 
@@ -332,7 +333,7 @@ input.is-valid:focus {
 
 h2, h3 {
   font-weight: 700;
-  color: var(--cor-neutra-escura-2);
+  color: var(--cor-texto-titulo);
   margin-bottom: var(--espaco-2);
 }
 
@@ -363,13 +364,13 @@ p {
 
 .page-section-dark {
   padding: var(--espaco-5) 0;
-  background-color: var(--cor-neutra-escura-2);
-  color: var(--cor-neutra-clara-2);
+  background-color: var(--cor-texto-titulo);
+  color: var(--cor-fundo-site);
 }
 .page-section-dark .page-title,
 .page-section-dark h2,
 .page-section-dark h3 {
-  color: var(--cor-neutra-clara-1);
+  color: var(--cor-fundo-componente);
 }
 
 /* Grid de conteúdo genérico */
@@ -390,12 +391,12 @@ p {
 .hero-section {
   padding: var(--espaco-6) 0;
   background-color: var(--cor-primaria-escura);
-  color: var(--cor-neutra-clara-1);
+  color: var(--cor-fundo-componente);
   text-align: center;
 }
 .hero-section h2 {
   font-size: var(--tamanho-xxg);
-  color: var(--cor-neutra-clara-1);
+  color: var(--cor-fundo-componente);
 }
 .hero-section p {
   font-size: var(--tamanho-md);
@@ -410,7 +411,7 @@ p {
 }
 .btn-secondary:hover {
   background-color: var(--cor-primaria);
-  color: var(--cor-neutra-clara-1);
+  color: var(--cor-fundo-componente);
 }
 
 /* Depoimentos (projetos.html) */
@@ -441,7 +442,7 @@ blockquote cite {
 }
 
 .card {
-  background-color: var(--cor-neutra-clara-1);
+  background-color: var(--cor-fundo-componente);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   overflow: hidden; /* Garante que a imagem respeite o radius */
@@ -474,7 +475,7 @@ blockquote cite {
 
 .card-footer {
   padding: var(--espaco-2) var(--espaco-3);
-  border-top: 1px solid var(--cor-neutra-clara-2);
+  border-top: 1px solid var(--cor-fundo-site);
   display: flex;
   flex-wrap: wrap;
   gap: var(--espaco-1);
@@ -490,8 +491,8 @@ blockquote cite {
   font-weight: 700;
   text-transform: uppercase;
   border-radius: 4px;
-  color: var(--cor-neutra-escura-2);
-  background-color: var(--cor-neutra-media);
+  color: var(--cor-texto-titulo);
+  background-color: var(--cor-borda);
 }
 
 /* Variações de cor */
@@ -519,4 +520,71 @@ blockquote cite {
 
 .alert-info strong {
   color: #0c598a;
+}
+/* --- 14. Acessibilidade (Modo Escuro Toggle) --- */
+
+/* Esconde o texto da label, mas o mantém para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.accessibility-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: var(--espaco-3); /* Adiciona espaço após o menu */
+}
+
+.toggle-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 1; /* Fica em cima do switch visual */
+}
+
+.toggle-switch {
+  width: 50px;
+  height: 28px;
+  background-color: var(--cor-borda);
+  border-radius: 14px;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+/* A "bola" do interruptor */
+.toggle-switch::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: white;
+  top: 3px;
+  left: 4px;
+  transition: transform 0.2s ease;
+}
+
+/* Estado Ligado (Dark Mode) */
+.toggle-checkbox:checked + .toggle-switch {
+  background-color: var(--cor-primaria);
+}
+
+.toggle-checkbox:checked + .toggle-switch::before {
+  transform: translateX(21px); /* Move a bola para a direita */
+}
+
+/* Foco do teclado */
+.toggle-checkbox:focus + .toggle-switch {
+  outline: 2px solid var(--cor-primaria-escura);
+  outline-offset: 2px;
 }

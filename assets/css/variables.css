@@ -5,6 +5,15 @@
 
 /* O :root permite que essas variáveis sejam globais (usadas em todos os arquivos) */
 :root {
+  :root {
+  /* Variáveis de Tema (Modo Claro - Padrão) */
+  --cor-fundo-site: #f4f4f8;             /* --cor-neutra-clara-2 */
+  --cor-fundo-componente: #ffffff;         /* --cor-neutra-clara-1 */
+  --cor-texto-principal: #454f5b;        /* --cor-neutra-escura-1 */
+  --cor-texto-titulo: #1c232b;        /* --cor-neutra-escura-2 */
+  --cor-borda: #dfe3e8;           /* --cor-neutra-media */
+  --cor-fundo-input: #f4f4f8;             /* --cor-neutra-clara-2 */
+  --cor-fundo-hover: #f4f4f8;             /* --cor-neutra-clara-2 */
 
   /* --- 1. Paleta de Cores (8+ cores) --- */
   
@@ -52,4 +61,18 @@
   --espaco-5: 48px;  /* 6x */
   --espaco-6: 64px;  /* 8x */
   
+}
+/* Estilos do Modo Escuro (Ativado via JS) */
+/* Quando o <body> tiver a classe .dark-mode, 
+   estas variáveis sobrescrevem as de :root */
+
+body.dark-mode {
+  /* Reverte as cores para alto contraste */
+  --cor-fundo-site: #121212;
+  --cor-fundo-componente: #1e1e1e;
+  --cor-texto-principal: #e0e0e0;
+  --cor-texto-titulo: #ffffff;
+  --cor-borda: #444444;
+  --cor-fundo-input: #2c2c2c;
+  --cor-fundo-hover: #333333;
 }
