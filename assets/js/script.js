@@ -52,7 +52,65 @@
         this.mainNav.classList.remove('active');
         this.navToggle.classList.remove('active');
       }
+    },
+    });
+    }, // <-- Fim da função toggleMenu()
+
+    closeMenu: function() {
+      // ... (código existente da closeMenu)
+    }, // <-- Fim da função closeMenu()
+
+    // COLE O NOVO CÓDIGO A PARTIR DAQUI
+    initDropdownAccessibility: function() {
+      const dropdownLink = document.getElementById('projetos-link');
+      const submenu = document.getElementById('submenu-projetos');
+
+      if (!dropdownLink || !submenu) return;
+
+      dropdownLink.addEventListener('keydown', (e) => {
+        // Se pressionar Seta para Baixo, abre o menu e foca no primeiro item
+        if (e.key === 'ArrowDown') {
+          e.preventDefault(); // Impede a página de rolar
+          dropdownLink.setAttribute('aria-expanded', 'true');
+          submenu.querySelector('a').focus(); // Foca no primeiro link do submenu
+        }
+      });
+
+      const submenuItems = submenu.querySelectorAll('a');
+      submenuItems.forEach((item, index) => {
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            // Se pressionar Escape, fecha o menu e foca de volta no link "Projetos"
+            e.preventDefault();
+            dropdownLink.setAttribute('aria-expanded', 'false');
+            dropdownLink.focus();
+          }
+          if (e.key === 'ArrowDown') {
+            // Move para o próximo item
+            e.preventDefault();
+            if (index < submenuItems.length - 1) {
+              submenuItems[index + 1].focus();
+            }
+          }
+          if (e.key === 'ArrowUp') {
+            // Move para o item anterior
+            e.preventDefault();
+            if (index > 0) {
+              submenuItems[index - 1].focus();
+            }
+          }
+        });
+      });
+
+      // Fecha o menu se o foco sair (ex: Tabbing para fora)
+      submenu.addEventListener('focusout', (e) => {
+        // `relatedTarget` é o elemento que *recebeu* o foco
+        if (!submenu.contains(e.relatedTarget)) {
+          dropdownLink.setAttribute('aria-expanded', 'false');
+        }
+      });
     }
+
   };
 
   /* ========================================================================

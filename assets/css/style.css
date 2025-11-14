@@ -139,9 +139,14 @@ main {
   gap: 0; /* Remove o gap do flex */
 }
 
-/* Mostra o dropdown quando o mouse passa sobre o item pai */
+/* Mostra o dropdown no hover OU quando o link principal está focado */
 .dropdown:hover .submenu,
-.dropdown:focus-within .submenu {
+.dropdown > a:focus + .submenu {
+  display: flex;
+}
+
+/* Mantém o submenu aberto enquanto um item DENTRO dele está focado */
+.dropdown .submenu:focus-within {
   display: flex;
 }
 
