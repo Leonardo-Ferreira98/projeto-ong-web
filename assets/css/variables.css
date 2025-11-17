@@ -1,55 +1,39 @@
-/* Arquivo: assets/css/variables.css
-  Descrição: Define o Sistema de Design (Design System) do projeto.
-  Contém: Paleta de Cores, Tipografia e Espaçamentos (Requisitos da Entrega II).
-*/
-
-/* O :root permite que essas variáveis sejam globais (usadas em todos os arquivos) */
 :root {
+  /* --- Tipografia e Espaçamento --- */
+  --fonte-principal: 'Open Sans', sans-serif;
+  --fonte-destaque: 'Montserrat', sans-serif;
 
-  /* --- 1. Paleta de Cores (8+ cores) --- */
-  
-  /* Primárias (Azul - confiança, seriedade) */
-  --cor-primaria: #005f9e;
-  --cor-primaria-escura: #004a7c;
-  
-  /* Secundárias (Laranja - ação, humanitário) */
-  --cor-secundaria: #f39c12;
-  --cor-secundaria-escura: #d0840e;
-  
-  /* Neutras (Para fundos, textos e bordas) */
-  --cor-neutra-clara-1: #ffffff;         /* Branco puro */
-  --cor-neutra-clara-2: #f4f4f8;         /* Fundo levemente cinza */
-  --cor-neutra-media: #dfe3e8;           /* Bordas, divisões */
-  --cor-neutra-escura-1: #454f5b;        /* Texto principal */
-  --cor-neutra-escura-2: #1c232b;        /* Títulos */
-  
-  /* Feedback (Para componentes de alerta e formulários) */
-  --cor-sucesso: #28a745;
-  --cor-erro: #dc3545;
-  --cor-aviso: #ffc107;
-  
-  /* --- 2. Tipografia (5+ tamanhos) --- */
-  
-  /* Família da Fonte */
-  --fonte-primaria: 'Montserrat', sans-serif;
-  
-  /* Tamanhos (Hierarquia) - Usamos 'rem' para acessibilidade */
-  --tamanho-xxg: 3.052rem;  /* h1 - 48.83px */
-  --tamanho-xg: 2.441rem;   /* h2 - 39.06px */
-  --tamanho-lg: 1.953rem;   /* h3 - 31.25px */
-  --tamanho-md: 1.563rem;   /* Subtítulos - 25px */
-  --tamanho-base: 1.25rem;    /* Corpo (p) - 20px */
-  --tamanho-sm: 1.0rem;     /* Pequeno - 16px */
-  --tamanho-xs: 0.8rem;     /* Mínimo - 12.8px */
-  /* Nota: Definimos 7 tamanhos, cumprindo o requisito de "no mínimo 5". */
+  --espaco-1: 8px;
+  --espaco-2: 16px;
+  --espaco-3: 24px;
+  --espaco-4: 32px;
+  --espaco-5: 48px;
+  --espaco-6: 64px;
 
+  /* --- Cores do Tema (Padrão / Claro) --- */
+  --cor-primaria: #005f9e;        /* Azul institucional */
+  --cor-primaria-escura: #004a7c; /* Hover botões */
+  --cor-secundaria: #f8991d;      /* Laranja destaque */
+  --cor-secundaria-escura: #d68215; /* Hover secundário */
 
-  /* --- 3. Sistema de Espaçamento Modular (Base 8px) --- */
-  --espaco-1: 8px;   /* 1x */
-  --espaco-2: 16px;  /* 2x */
-  --espaco-3: 24px;  /* 3x */
-  --espaco-4: 32px;  /* 4x */
-  --espaco-5: 48px;  /* 6x */
-  --espaco-6: 64px;  /* 8x */
-  
+  /* Variáveis Semânticas (que mudam no Dark Mode) */
+  --cor-fundo-site: #f4f4f8;             
+  --cor-fundo-componente: #ffffff;       
+  --cor-texto-principal: #454f5b;        
+  --cor-texto-titulo: #1c232b;        
+  --cor-borda: #dfe3e8;           
+  --cor-fundo-input: #f4f4f8;             
+  --cor-fundo-hover: #f4f4f8;             
+}
+
+/* --- Estilos do Modo Escuro --- */
+body.dark-mode {
+  /* Reverte as cores para alto contraste */
+  --cor-fundo-site: #121212;
+  --cor-fundo-componente: #1e1e1e;
+  --cor-texto-principal: #e0e0e0;
+  --cor-texto-titulo: #ffffff;
+  --cor-borda: #444444;       /* <-- Corrigido aqui (era horda) */
+  --cor-fundo-input: #2c2c2c;
+  --cor-fundo-hover: #333333;
 }

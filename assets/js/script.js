@@ -1,28 +1,12 @@
-/* ========================================================================
-   Arquivo: assets/js/script.js
-   Descrição: Script unificado para Entrega III.
-   Organizado por funcionalidade (Módulos)
-   ======================================================================== */
-
-// IIFE (Immediately Invoked Function Expression) para criar um escopo local
 (function() {
 
-  // Espera o DOM carregar
   document.addEventListener('DOMContentLoaded', function() {
-    
-    // Inicia os módulos principais
     MenuModule.init();
+    MenuModule.initDropdownAccessibility();
     SPARouter.init();
-    
-    // O FormModule será inicializado pelo SPARouter QUANDO a página de cadastro for carregada
-    
+    ThemeModule.init();
   });
 
-  /* ========================================================================
-     1. MÓDULO DE NAVEGAÇÃO (Menu Hamburger)
-     (Funcionalidade da Entrega II)
-     ======================================================================== */
-  
   const MenuModule = {
     navToggle: null,
     mainNav: null,
@@ -35,7 +19,6 @@
         this.navToggle.addEventListener('click', () => this.toggleMenu());
       }
       
-      // Fecha o menu ao clicar em um link da SPA
       this.mainNav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => this.closeMenu());
       });
@@ -51,25 +34,60 @@
         this.mainNav.classList.remove('active');
         this.navToggle.classList.remove('active');
       }
+    },
+
+    initDropdownAccessibility: function() {
+      const dropdownLink = document.getElementById('projetos-link');
+      const submenu = document.getElementById('submenu-projetos');
+
+      if (!dropdownLink || !submenu) return;
+
+      dropdownLink.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          dropdownLink.setAttribute('aria-expanded', 'true');
+          submenu.querySelector('a').focus();
+        }
+      });
+
+      const submenuItems = submenu.querySelectorAll('a');
+      submenuItems.forEach((item, index) => {
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            dropdownLink.setAttribute('aria-expanded', 'false');
+            dropdownLink.focus();
+          }
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (index < submenuItems.length - 1) {
+              submenuItems[index + 1].focus();
+            }
+          }
+          if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (index > 0) {
+              submenuItems[index - 1].focus();
+            }
+          }
+        });
+      });
+
+      submenu.addEventListener('focusout', (e) => {
+        if (!submenu.contains(e.relatedTarget)) {
+          dropdownLink.setAttribute('aria-expanded', 'false');
+        }
+      });
     }
   };
 
-  /* ========================================================================
-     2. MÓDULO DE FORMULÁRIO (Máscaras e Validação)
-     (Funcionalidades das Entregas I, II e III)
-     ======================================================================== */
-     
   const FormModule = {
-    
     init: function() {
-      // Esta função é chamada pelo Router QUANDO o formulário é carregado
       const form = document.getElementById('formCadastro');
       if (!form) return;
       
-      // 1. Aplica as Máscaras
       this.applyMasks();
       
-      // 2. Aplica a Validação (com a nova verificação de consistência)
       const inputs = form.querySelectorAll('input[required]');
       inputs.forEach(input => {
         input.addEventListener('blur', (e) => this.validateField(e.target));
@@ -77,7 +95,6 @@
     },
     
     applyMasks: function() {
-      // ... (código das máscaras da Entrega I) ...
       const inputCpf = document.getElementById('cpf');
       const inputTelefone = document.getElementById('telefone');
       const inputCep = document.getElementById('cep');
@@ -111,7 +128,6 @@
     },
     
     validateField: function(input) {
-      // 1. Pega o elemento de erro (agora todos têm um)
       const errorId = input.getAttribute('aria-describedby');
       const errorElement = errorId ? document.getElementById(errorId) : null;
       
@@ -119,19 +135,15 @@
 
       let errorMessage = '';
 
-      // 2. Validação padrão do HTML5 (required, pattern, type)
       if (!input.checkValidity()) {
         if (input.validity.valueMissing) errorMessage = 'Este campo é obrigatório.';
-        else if (input.validity.patternMismatch) errorMessage = `Formato inválido. Use o formato: ${input.placeholder}`;
+        else if (input.validity.patternMismatch) errorMessage = `Formato inválido.`;
         else if (input.validity.typeMismatch) errorMessage = 'Por favor, insira um e-mail válido.';
       }
       
-      // 3. [ENTREGA III] - Verificação de Consistência de Dados
       if (input.id === 'nascimento' && input.value) {
         const dataNascimento = new Date(input.value);
         const hoje = new Date();
-        
-        // Ajusta para comparar apenas datas (ignora fuso horário/hora)
         dataNascimento.setUTCHours(0, 0, 0, 0);
         hoje.setUTCHours(0, 0, 0, 0);
 
@@ -140,7 +152,6 @@
         }
       }
 
-      // 4. Atualiza a UI (Classes e Mensagens)
       if (errorMessage) {
         input.classList.add('is-invalid');
         input.classList.remove('is-valid');
@@ -155,17 +166,8 @@
     }
   };
 
-  /* ========================================================================
-     3. MÓDULO DE TEMPLATES
-     (Funcionalidade da Entrega III - "Sistema de templates JavaScript")
-     ======================================================================== */
-     
   const TemplateModule = {
-    
-    // Esta função recebe 1 objeto de projeto (do JSON) e retorna o HTML do card
     buildProjectCard: function(projeto) {
-      
-      // Operador ternário para lidar com o card sem imagem
       const imagemHTML = projeto.imagem_jpg
         ? `
         <picture class="card-image">
@@ -174,14 +176,12 @@
           <img src="${projeto.imagem_jpg}" alt="${projeto.alt}">
         </picture>
         `
-        : ''; // Retorna string vazia se não houver imagem
+        : '';
 
-      // Mapeia os dados das tags para HTML
       const tagsHTML = projeto.tags.map(tag => 
         `<span class="badge ${tag.classe}">${tag.label}</span>`
-      ).join(''); // .join() junta o array de strings em uma string só
+      ).join('');
       
-      // Retorna o template literal do card completo
       return `
         <article class="card">
           ${imagemHTML}
@@ -197,146 +197,128 @@
     }
   };
 
-  /* ========================================================================
-     4. MÓDULO ROTEADOR DA SPA
-     (Funcionalidade da Entrega III - "Sistema de SPA básico")
-     ======================================================================== */
-     
-  /* ========================================================================
-   4. MÓDULO ROTEADOR DA SPA
-   (Funcionalidade da Entrega III - "Sistema de SPA básico")
-   [CORRIGIDO PARA LIDAR COM ÂNCORAS / SCROLL]
-   ======================================================================== */
-   
-const SPARouter = {
-  contentArea: null,
-  
-  init: function() {
-    this.contentArea = document.getElementById('main-content-area');
-    if (!this.contentArea) {
-      console.error("Erro: Área de conteúdo principal 'main-content-area' não encontrada.");
-      return;
-    }
+  const SPARouter = {
+    contentArea: null,
     
-    // Ouve mudanças na URL (ex: #inicio -> #projetos)
-    window.addEventListener('hashchange', () => this.route());
+    init: function() {
+      this.contentArea = document.getElementById('main-content-area');
+      if (!this.contentArea) return;
+      
+      window.addEventListener('hashchange', () => this.route());
+      this.route();
+    },
     
-    // Carrega a rota inicial (ou a página inicial se não houver hash)
-    this.route();
-  },
-  
-  route: function() {
-    let hash = window.location.hash;
-    
-    if (!hash) {
-      hash = '#inicio';
-    }
-    
-    // [CORREÇÃO] Pega a rota principal E a âncora (ex: #projetos e #acoes-sociais)
-    const parts = hash.substring(1).split('#'); // ex: ["projetos", "acoes-sociais"]
-    const mainRoute = parts[0]; // ex: "projetos"
-    const anchor = parts[1] || null;  // ex: "acoes-sociais" ou null
-    
-    // Carrega o conteúdo baseado no hash
-    switch (mainRoute) {
-      case 'inicio':
-        this.loadHTML('inicio.html', 'body > *', null, anchor);
-        break;
-      case 'projetos':
-        this.loadProjects(anchor); // Passa a âncora para a função
-        break;
-      case 'cadastro':
-        // Passa a âncora e o callback
-        this.loadHTML('cadastro.html', 'body > *', () => FormModule.init(), anchor);
-        break;
-      default:
-        this.loadHTML('inicio.html', 'body > *', null, anchor);
-    }
-  },
-  
-  // [CORREÇÃO] Função de scroll para âncora
-  scrollToAnchor: function(anchorId) {
-    // Usa um setTimeout de 100ms. Isso dá ao navegador tempo
-    // para renderizar o novo conteúdo (HTML/Cards) ANTES de
-    // tentarmos rolar para um ID dentro dele.
-    setTimeout(() => {
-      const element = document.getElementById(anchorId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+    route: function() {
+      let hash = window.location.hash;
+      if (!hash) hash = '#inicio';
+      
+      const parts = hash.substring(1).split('#');
+      const mainRoute = parts[0];
+      const anchor = parts[1] || null;
+      
+      switch (mainRoute) {
+        case 'inicio':
+          this.loadHTML('inicio.html', 'body > *', null, anchor);
+          break;
+        case 'projetos':
+          this.loadProjects(anchor);
+          break;
+        case 'cadastro':
+          this.loadHTML('cadastro.html', 'body > *', () => FormModule.init(), anchor);
+          break;
+        default:
+          this.loadHTML('inicio.html', 'body > *', null, anchor);
       }
-    }, 100);
-  },
-  
-  // [CORREÇÃO] loadHTML agora aceita a âncora
-  loadHTML: async function(url, selector, callback, anchor) {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Não foi possível carregar o conteúdo.');
-      
-      const text = await response.text();
-      
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(text, 'text/html');
-      
-      const content = doc.querySelector(selector);
-      
-      if (content) {
-        this.contentArea.innerHTML = '';
-        doc.querySelectorAll(selector).forEach(node => {
-          this.contentArea.appendChild(node.cloneNode(true));
-        });
-      } else {
-        this.contentArea.innerHTML = '<p>Erro: Conteúdo não encontrado.</p>';
-      }
-      
-      if (callback) callback();
-      
-      // [CORREÇÃO] Tenta rolar para a âncora depois que o HTML for carregado
-      if (anchor) {
-        this.scrollToAnchor(anchor);
-      }
-      
-    } catch (error) {
-      console.error('Erro ao carregar página:', error);
-      this.contentArea.innerHTML = '<p>Erro ao carregar o conteúdo. Tente novamente.</p>';
-    }
-  },
-  
-  // [CORREÇÃO] loadProjects agora aceita a âncora
-  loadProjects: async function(anchor) {
-    // 1. Carrega o "esqueleto" da página de projetos
-    // (Não passamos a âncora aqui, pois o conteúdo final (cards)
-    // ainda não foi carregado)
-    await this.loadHTML('projetos.html', 'body > *');
+    },
     
-    // 2. Agora, busca os dados JSON
-    try {
-      const response = await fetch('assets/data/projetos.json');
-      if (!response.ok) throw new Error('Não foi possível carregar os dados dos projetos.');
-      
-      const projetos = await response.json();
-      
-      const grid = document.getElementById('project-card-grid');
-      if (grid) {
-        grid.innerHTML = '';
+    scrollToAnchor: function(anchorId) {
+      setTimeout(() => {
+        const element = document.getElementById(anchorId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    },
+    
+    loadHTML: async function(url, selector, callback, anchor) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Erro ao carregar');
         
-        projetos.forEach(projeto => {
-          const cardHTML = TemplateModule.buildProjectCard(projeto);
-          grid.innerHTML += cardHTML;
-        });
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        const content = doc.querySelector(selector);
+        
+        if (content) {
+          this.contentArea.innerHTML = '';
+          doc.querySelectorAll(selector).forEach(node => {
+            this.contentArea.appendChild(node.cloneNode(true));
+          });
+        }
+        
+        if (callback) callback();
+        if (anchor) this.scrollToAnchor(anchor);
+        
+      } catch (error) {
+        console.error(error);
+        this.contentArea.innerHTML = '<p>Erro ao carregar o conteúdo.</p>';
       }
-    } catch (error) {
-      console.error('Erro ao carregar dados dos projetos:', error);
-      const grid = document.getElementById('project-card-grid');
-      if (grid) grid.innerHTML = '<p>Erro ao carregar os projetos.</p>';
-    }
+    },
     
-    // [CORREÇÃO] Tenta rolar para a âncora DEPOIS que os cards
-    // e o esqueleto da página foram carregados.
-    if (anchor) {
-      this.scrollToAnchor(anchor);
+    loadProjects: async function(anchor) {
+      await this.loadHTML('projetos.html', 'body > *');
+      
+      try {
+        const response = await fetch('assets/data/projetos.json');
+        if (!response.ok) throw new Error('Erro no JSON');
+        
+        const projetos = await response.json();
+        const grid = document.getElementById('project-card-grid');
+        
+        if (grid) {
+          grid.innerHTML = '';
+          projetos.forEach(projeto => {
+            grid.innerHTML += TemplateModule.buildProjectCard(projeto);
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      
+      if (anchor) this.scrollToAnchor(anchor);
     }
-  }
-};
+  };
 
-})(); // Fim da IIFE
+  const ThemeModule = {
+    init: function() {
+      const toggle = document.getElementById('theme-toggle');
+      if (!toggle) return;
+      
+      const AbraceTheme = localStorage.getItem('AbraceTheme');
+      if (AbraceTheme === 'dark') {
+        this.enableDarkMode();
+        toggle.checked = true;
+      }
+      
+      toggle.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          this.enableDarkMode();
+        } else {
+          this.disableDarkMode();
+        }
+      });
+    },
+    
+    enableDarkMode: function() {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('AbraceTheme', 'dark');
+    },
+    
+    disableDarkMode: function() {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('AbraceTheme', 'light');
+    }
+  };
+
+})();

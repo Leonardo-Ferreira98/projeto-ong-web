@@ -6,37 +6,50 @@
   <meta name="description" content="Página inicial da ONG Abrace o Futuro, dedicada a projetos sociais e voluntariado.">
   <title>ONG Abrace o Futuro - Página Inicial</title>
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap](https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap)" rel="stylesheet">
   
   <link rel="stylesheet" href="assets/css/reset.css">
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/style.min.css">
 </head>
 <body>
 
   <header class="main-header">
     <div class="container">
-      <a href="#inicio" class="logo"> <h1>ONG Abrace o Futuro</h1>
+      <a href="#inicio" class="logo">
+        <h1>ONG Abrace o Futuro</h1>
       </a>
+      
       <button class="nav-toggle" aria-label="Abrir menu de navegação">
         <span class="hamburger-linha"></span>
         <span class="hamburger-linha"></span>
         <span class="hamburger-linha"></span>
       </button>
+      
       <nav class="main-nav">
         <ul>
-          <li><a href="#inicio">Início</a></li> <li class="dropdown">
-            <a href="#projetos">Projetos</a> <ul class="submenu">
+          <li><a href="#inicio">Início</a></li>
+          <li class="dropdown">
+            <a href="#projetos" id="projetos-link" aria-haspopup="true" aria-expanded="false">Projetos</a>
+            <ul class="submenu" id="submenu-projetos" aria-labelledby="projetos-link">
               <li><a href="#projetos#acoes-sociais">Ações Sociais</a></li>
               <li><a href="#projetos#depoimentos">Depoimentos</a></li>
               <li><a href="#projetos#doacao">Formas de Doação</a></li>
             </ul>
           </li>
-          <li><a href="#cadastro">Participe</a></li> </ul>
+          <li><a href="#cadastro">Participe</a></li>
+        </ul>
       </nav>
+      
+      <div class="accessibility-toggle">
+        <label for="theme-toggle" class="toggle-label">
+          <span class="sr-only">Alternar tema</span>
+        </label>
+        <input type="checkbox" id="theme-toggle" class="toggle-checkbox">
+        <div class="toggle-switch" aria-hidden="true"></div>
+      </div>
+
     </div>
   </header>
 
@@ -45,8 +58,8 @@
 
   <footer>
     <p>&copy; 2025 ONG Abrace o Futuro. Todos os direitos reservados.</p>
-    </footer>
+  </footer>
 
-  <script src="assets/js/script.js" type="module" defer></script>
+  <script src="assets/js/script.min.js" type="module" defer></script>
 </body>
 </html>
